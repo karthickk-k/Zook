@@ -1,5 +1,8 @@
+"use client"
+
 import Link from "next/link";
 import { ShoppingBag, Shirt, Truck, ShieldCheck, BadgePercent, } from "lucide-react";
+import Image from 'next/image'
 
 const Home = () => {
   return (
@@ -75,9 +78,9 @@ const Home = () => {
           </div>
         </div>
 
-        <div>
-          <img src="https://images.pexels.com/photos/32549963/pexels-photo-32549963.jpeg" alt="fashionimg"
-            className="w-full h-[650px] object-cover rounded-3xl shadow-2xl" />
+        <div className="w-fill h-[650px]">
+          <Image src="https://images.pexels.com/photos/32549963/pexels-photo-32549963.jpeg" alt="fashionimg"
+            width={500} height={500} className="w-full h-[650px] rounded-3xl shadow-2xl" />
         </div>
       </div>
     </div >

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import useCartStore from "@/store/cartStore";
 import { getProductById } from "@/services/productService";
+import Image from "next/image";
 
 interface Product {
   id: number;
@@ -56,7 +57,7 @@ const ProductDetails = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center min-h-screen">
+      <div className="flex justify-center item-center min-h-screen">
         <div className="text-3xl font-bold">
           Loading...
         </div>
@@ -82,8 +83,8 @@ const ProductDetails = () => {
         </div>
       </Link>
       <div className="grid md:grid-cols-2 gap-8 p-5">
-        <img src={product.image} alt={product.title}
-          className="w-full p-2 object-contain bg-[#EEEEEE] rounded-xl" />
+        <Image src={product.image} alt={product.title} width={500} height={400}
+          className="w-full p-2 bg-[#EEEEEE] rounded-2xl" />
         <div className="flex flex-col justify-center p-3">
           <div className="text-4xl font-bold">
             {product.title}
