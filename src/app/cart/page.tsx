@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import useCartStore from "@/store/cartStore";
 import useOrderStore from "@/store/orderStore";
 import { Trash2, Plus, Minus, ShoppingCart, ChevronLeft } from "lucide-react";
+import Image from "next/image";
 
 type CartItem = {
     id: number;
@@ -72,8 +73,6 @@ const CartPage = () => {
                         <div className="bg-[#D0E7E6] p-5 rounded-full mb-6">
                             <ShoppingCart className="w-24 h-24 sm-w-28 sm:h-28 md:w-30 md:h-30" color="#FEEC41" fill="#57595B" strokeWidth={1.3} />
                         </div>
-
-
                         <div className="text-[#57564F] font-semibold tracking-wide text-base sm:text-lg">
                             Add some products to see them here.
                         </div>
@@ -88,7 +87,7 @@ const CartPage = () => {
                         {cartItems.map((item: CartItem) => (
                             <div key={item.id}
                                 className="bg-[#FFFFFF] rounded-xl shadow-md p-5 flex flex-col md:flex-row gap-5" >
-                                <img src={item.image} alt={item.title}
+                                <Image src={item.image} alt={item.title} width={210} height={210}
                                     className="w-full md:w-52 h-52 object-contain rounded-lg bg-[#EEEEEE] p-2" />
                                 <div className="flex-1 space-y-3">
                                     <div className="text-xl sm:text-2xl font-bold"> {item.title} </div>

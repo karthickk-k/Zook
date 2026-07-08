@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import useOrderStore from "@/store/orderStore";
 import { CalendarDays, ChevronLeft, Package, PackageOpen, ShoppingBag } from 'lucide-react';
 import Link from "next/link";
+import Image from "next/image";
 
 const OrderPage = () => {
     const { data: session } = useSession();
@@ -14,7 +15,6 @@ const OrderPage = () => {
     return (
         <div className="min-h-screen bg-gradient-to-b from-[#F5F5F0] via-[#FFFF] to-[#F5F5F0]  py-10 ">
             <div className="max-w-7xl mx-auto px-4">
-
                 <div className="flex item-center justify-between mb-5">
                     <Link href="/products">
                         <div className="w-[40px] h-[40px] bg-[#222222] rounded-full p-1 cursor-pointer">
@@ -81,8 +81,8 @@ const OrderPage = () => {
                                 <div className="space-y-5">
                                     {order.items.map((item) => (
                                         <div key={item.id} className="flex flex-col md:flex-row gap-5 border  p-4">
-                                            <img src={item.image} alt={item.title}
-                                                className="w-36 h-36 object-contain bg-gray-100 rounded-lg" />
+                                            <Image src={item.image} alt={item.title} width={144} height={144}
+                                                className="w-38 h-38 object-contain bg-[#EEEEEE] rounded-lg" />
                                             <div className="flex-1 ml-3">
                                                 <div className="text-xl font-bold"> {item.title}</div>
                                                 <div className="text-blue-600 mt-2"> {item.brand}</div>

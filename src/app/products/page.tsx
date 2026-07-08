@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState, } from "react";
 import { useRouter, useSearchParams, } from "next/navigation";
 import { Search } from "lucide-react";
+import Image from "next/image";
 
 interface ProductList {
   id: number;
@@ -89,7 +90,7 @@ const ProductCard = () => {
     return (
       <div className="flex justify-center items-center min-h-[300px]">
         <h1 className="text-2xl font-bold">
-          Loading Products...
+          Loading...
         </h1>
       </div>
     );
@@ -121,7 +122,7 @@ const ProductCard = () => {
         {paginatedProducts.map((item) => (
           <div key={item.id} className="bg-[#FFFF] rounded-3xl shadow-[2px_2px_2px_-2px] p-6 flex flex-col gap-3">
             <div className="bg-[#F7F9FF] rounded-xl p-4 overflow-hidden ">
-              <img src={item.image} alt={item.title}
+              <Image src={item.image} alt={item.title} width={230} height={230}
                 className="w-full h-56 object-contain transition-transform duration-300 hover:scale-110" />
             </div>
             <div className="text-xl text-[#000000] font-bold mt-4"> {item.title} </div>
@@ -164,7 +165,3 @@ const ProductCard = () => {
 };
 
 export default ProductCard;
-
-
-
-
