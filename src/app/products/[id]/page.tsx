@@ -46,7 +46,7 @@ const ProductDetails = () => {
   };
 
   const handleAddToCart = () => {
-    const userId = (session?.user as { id?: number })?.id;
+    const userId = String((session?.user as { id?: number | string })?.id ?? "");
     if (!userId) {
       router.push("/login");
       return;

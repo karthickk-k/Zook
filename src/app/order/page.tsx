@@ -8,9 +8,9 @@ import Image from "next/image";
 
 const OrderPage = () => {
     const { data: session } = useSession();
-    const userId = (session?.user as any)?.id;
+    const userId = String((session?.user as any)?.id ?? "");
     const ordersMap = useOrderStore((state) => state.orders);
-    const orders = userId ? ordersMap[String(userId)] || [] : [];
+    const orders = userId ? ordersMap[userId] || [] : [];
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-[#F5F5F0] via-[#FFFF] to-[#F5F5F0]  py-10 ">

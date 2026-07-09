@@ -25,7 +25,7 @@ const navItems = [
 const Navbar = () => {
     const pathname = usePathname();
     const { data: session } = useSession();
-    const userId = session?.user?.id;
+    const userId = String(session?.user?.id ?? "");
     const carts = useCartStore((state) => state.carts);
     const cartItems = userId ? (carts[userId] ?? []) : [];
     const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);

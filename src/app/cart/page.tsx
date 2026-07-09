@@ -20,7 +20,7 @@ type CartItem = {
 const CartPage = () => {
     const router = useRouter();
     const { data: session } = useSession();
-    const userId = (session?.user as any)?.id as | string | undefined;
+    const userId = String((session?.user as any)?.id ?? "");
     const carts = useCartStore((state: any) => state.carts);
     const cartItems: CartItem[] = userId ? carts[userId] ?? [] : [];
     const removeItem = useCartStore((state: any) => state.removeItem);
@@ -33,8 +33,8 @@ const CartPage = () => {
 
     const handleCheckout = () => {
         if (!userId || cartItems.length === 0) return;
-        addOrder(String(userId), cartItems, totalPrice);
-        clearCart(String(userId));
+        addOrder(userId, cartItems, totalPrice);
+        clearCart(userId);
         router.push("/order");
     };
 
