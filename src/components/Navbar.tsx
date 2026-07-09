@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import useCartStore from "@/store/cartStore";
 import { ShoppingCart, Menu, X, LogIn, LogOut, User, } from "lucide-react";
@@ -29,12 +29,17 @@ const Navbar = () => {
     const carts = useCartStore((state) => state.carts);
     const cartItems = userId ? (carts[userId] ?? []) : [];
     const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+    const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
     const isLoggedIn = !!session;
     const userName = session?.user?.name;
     const transitionClass = "transition-all duration-300";
     const toggleMenu = () => { setIsOpen((prev) => !prev); };
     const closeMenu = () => { setIsOpen(false); };
+    const handleCartClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault();
+        router.push("/cart");
+    };
 
     const handleLogout = () => {
         signOut({
@@ -66,7 +71,9 @@ const Navbar = () => {
                             </Link>
                         ))}
                         <Link
-                            href="/cart" className={`relative p-3 rounded-xl ${transitionClass} ${getNavClass("/cart")}`}>
+                            href="/cart"
+                            onClick={handleCartClick}
+                            className={`relative p-3 rounded-xl ${transitionClass} ${getNavClass("/cart")}`}>
                             <ShoppingCart size={24} />
                             {cartCount > 0 && (
                                 <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
@@ -109,7 +116,7 @@ const Navbar = () => {
                                 {item.name}
                             </Link>
                         ))}
-                        <Link href="/cart" onClick={closeMenu}
+                        <Link href="/cart" onClick={(e) => { e.preventDefault(); closeMenu(); router.push("/cart"); }}
                             className={`flex items-center justify-between px-4 py-3 rounded-lg ${transitionClass} ${getNavClass("/cart")}`}>
                             <div className="flex items-center gap-3">
                                 <ShoppingCart size={20} /> Cart
