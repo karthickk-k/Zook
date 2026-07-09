@@ -36,7 +36,7 @@ const Navbar = () => {
     const transitionClass = "transition-all duration-300";
     const toggleMenu = () => { setIsOpen((prev) => !prev); };
     const closeMenu = () => { setIsOpen(false); };
-    const handleCartClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const handleCartClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         router.push("/cart");
     };
@@ -70,8 +70,8 @@ const Navbar = () => {
                                 {item.name}
                             </Link>
                         ))}
-                        <Link
-                            href="/cart"
+                        <button
+                            type="button"
                             onClick={handleCartClick}
                             className={`relative p-3 rounded-xl ${transitionClass} ${getNavClass("/cart")}`}>
                             <ShoppingCart size={24} />
@@ -80,7 +80,7 @@ const Navbar = () => {
                                     {cartCount}
                                 </span>
                             )}
-                        </Link>
+                        </button>
 
                         {isLoggedIn ? (
                             <>
@@ -116,7 +116,9 @@ const Navbar = () => {
                                 {item.name}
                             </Link>
                         ))}
-                        <Link href="/cart" onClick={(e) => { e.preventDefault(); closeMenu(); router.push("/cart"); }}
+                        <button
+                            type="button"
+                            onClick={() => { closeMenu(); router.push("/cart"); }}
                             className={`flex items-center justify-between px-4 py-3 rounded-lg ${transitionClass} ${getNavClass("/cart")}`}>
                             <div className="flex items-center gap-3">
                                 <ShoppingCart size={20} /> Cart
@@ -126,7 +128,7 @@ const Navbar = () => {
                                     {cartCount}
                                 </span>
                             )}
-                        </Link>
+                        </button>
 
                         {isLoggedIn ? (
                             <>
